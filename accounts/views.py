@@ -38,3 +38,13 @@ def update_profile(request):
     return render(request, 'registration/update_profile.html', {
         'profile_form': profile_form
 })
+
+def ruang_favorit(request):
+    user = request.user
+    ruang_favorit = user.favorit.all()
+
+    print('ruang favorit:')
+    for x in ruang_favorit:
+        print(x.id)
+
+    return render (request=request, template_name="ruang_favorit.html", context={"ruang_favorit":ruang_favorit})

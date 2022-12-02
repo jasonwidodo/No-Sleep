@@ -1,6 +1,8 @@
 from .models import CoworkingSpace
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.shortcuts import redirect
 
 class IndexView(ListView):
     model = CoworkingSpace
@@ -35,3 +37,23 @@ class Delete(DeleteView):
     template_name = 'coworkingSpace/confirm-delete.html'
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('coworkingSpace:posts')
+
+def add_favorit(request, id):
+    try:
+        coworkingSpace = CoworkingSpace.objects.get(id=id)
+        coworkingSpace.favorit.add(request.user)
+        return redirect('/accounts/ruang_favorit/')
+    except:
+        messages.error(request, 'Error')
+
+    return redirect('/coworkingSpace/')
+
+def delete_favorit(request, id):
+    try:
+        coworkingSpace = CoworkingSpace.objects.get(id=id)
+        coworkingSpace.favorit.remove(request.user)
+        return redirect('/accounts/ruang_favorit/')
+    except:
+        messages.error(request, 'Error')
+    
+    return redirect('/coworkingSpace/')

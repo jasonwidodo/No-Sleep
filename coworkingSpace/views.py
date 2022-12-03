@@ -1,7 +1,8 @@
 from .models import CoworkingSpace
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import redirect
 
 class IndexView(ListView):
@@ -57,3 +58,21 @@ def delete_favorit(request, id):
         messages.error(request, 'Error')
     
     return redirect('/coworkingSpace/')
+
+class SearchView(TemplateView):
+    model = CoworkingSpace
+    template_name = 'coworkingSpace/search.html'
+
+# def searchPage(request):
+#     return render(request, 'search.html')
+
+class SearchResultsView(ListView):
+    model = CoworkingSpace
+    template_name = 'coworkingSpace/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = CoworkingSpace.objects.filter(
+            Q(nama__icontains=query)
+        )
+        return object_list

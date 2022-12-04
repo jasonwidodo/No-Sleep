@@ -7,7 +7,7 @@
             {% for coworkingSpace in index %}
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="https://via.placeholder.com/150x100" alt="Card Image Cap">
+                        <img class="card-img-top" src="{{ coworkingSpace.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
                         <div class="card-body">
                             <h4 class=""><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
                                 <p class="card-text"></p>

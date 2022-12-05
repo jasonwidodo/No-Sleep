@@ -8,8 +8,8 @@
         }
         .flip-card {
             background-color: transparent;
-            width: 150px;
-            height: 100px;
+            width: 350px;
+            height: 230px;
             perspective: 1000px;
         }
 
@@ -91,7 +91,7 @@
                                 <div class="flip-card">
                                     <div class="flip-card-inner">
                                         <div class="flip-card-front">
-                                            <img src="{{ post.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
+                                            <img src="{{ post.image.url }}" alt="Card Image Cap" style="max-width:100%; height:auto">
                                         </div>
                                         <div class="flip-card-back">
                                             <h4><a href="{{ post.get_absolute_url }}">{{ post.nama }}</a></h4>
@@ -102,6 +102,7 @@
                                 </div>
                             </div>
                         </div>
+                    <br>
                     </div>
                 {% endfor %}
             </div>

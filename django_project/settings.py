@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'coworkingSpace',
     'widget_tweaks',
     'crispy_forms',
+    'booking'
 ]
 
 MIDDLEWARE = [

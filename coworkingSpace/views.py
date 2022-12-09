@@ -1,6 +1,9 @@
 from .models import CoworkingSpace
-from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
+from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import redirect
 
 class IndexView(ListView):
     model = CoworkingSpace
@@ -35,3 +38,41 @@ class Delete(DeleteView):
     template_name = 'coworkingSpace/confirm-delete.html'
     pk_url_kwarg = 'pk'
     success_url = reverse_lazy('coworkingSpace:posts')
+
+def add_favorit(request, id):
+    try:
+        coworkingSpace = CoworkingSpace.objects.get(id=id)
+        coworkingSpace.favorit.add(request.user)
+        return redirect('/accounts/ruang_favorit/')
+    except:
+        messages.error(request, 'Error')
+
+    return redirect('/coworkingSpace/')
+
+def delete_favorit(request, id):
+    try:
+        coworkingSpace = CoworkingSpace.objects.get(id=id)
+        coworkingSpace.favorit.remove(request.user)
+        return redirect('/accounts/ruang_favorit/')
+    except:
+        messages.error(request, 'Error')
+    
+    return redirect('/coworkingSpace/')
+
+class SearchView(TemplateView):
+    model = CoworkingSpace
+    template_name = 'coworkingSpace/search.html'
+
+# def searchPage(request):
+#     return render(request, 'search.html')
+
+class SearchResultsView(ListView):
+    model = CoworkingSpace
+    template_name = 'coworkingSpace/search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = CoworkingSpace.objects.filter(
+            Q(nama__icontains=query)
+        )
+        return object_list

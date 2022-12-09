@@ -13,6 +13,7 @@ class CoworkingSpace(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='static/spaces/')
+    favorit = models.ManyToManyField(User, related_name='favorit', blank=True)
 
     def get_absolute_url(self):
         return reverse('coworkingSpace:single', args = [self.slug])

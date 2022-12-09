@@ -35,16 +35,19 @@ DEBUG = not PRODUCTION
 
 APP_NAME = os.getenv('APP_NAME', '')
 
-ALLOWED_HOSTS = [f'{APP_NAME}.up.railway.app']
+ALLOWED_HOSTS = ['kerjakuy.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://kerjakuy.up.railway.app']
 
 if not PRODUCTION:
     ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]']
+    CSRF_TRUSTED_ORIGINS = ['https://*.127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+     'accounts',
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -52,6 +55,7 @@ INSTALLED_APPS = [
     'main',
     'coworkingSpace',
     'widget_tweaks',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -156,9 +160,15 @@ for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
 
 # Enable compression and caching features of whitenoise.
 # You can remove this if it causes problems on your setup.
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_REDIRECT_URL = 'main:home'

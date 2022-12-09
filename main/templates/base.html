@@ -31,7 +31,10 @@
         <ul class="navbar-nav mr-auto">
           {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'coworkingSpace:index' %}">Coworking Space</a>
+                <a class="nav-link" href="{% url 'coworkingSpace:index' %}">Coworking Space</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'booking:index' %}">Booking</a>
             </li>
           {% endif %}
         </ul>

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class CoworkingSpace(models.Model):
     nama = models.CharField(max_length=200)
     alamat = models.CharField(max_length=200)
-    harga = models.CharField(max_length=100)
+    harga = models.IntegerField()
     kapsitas = models.CharField(max_length=5, default='1')
     detail = models.TextField(null=True)
     slug = models.SlugField(max_length=100, unique=True)

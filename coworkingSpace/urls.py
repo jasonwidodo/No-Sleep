@@ -14,5 +14,4 @@ urlpatterns = [
     path('delete_favorit/<int:id>/', views.delete_favorit, name='delete_favorit'),
     path("search_result/", views.SearchResultsView.as_view(), name="search_results"),
     path("search/", views.SearchView.as_view(), name="search"),
-    # path('search/', searchPage, name='search'),
 ]

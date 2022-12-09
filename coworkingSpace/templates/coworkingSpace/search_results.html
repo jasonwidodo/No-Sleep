@@ -1,29 +1,26 @@
-<h1>Search Results</h1>
+{% extends 'coworkingSpace/base.html' %}
 
-<ul>
-  {% for city in object_list %}
-    <li>
-      {% block content %}
-      <div class="album py-5 bg-light">
-          <div class="container">
-              <div class="row">
-                  {% for coworkingSpace in index %}
-                      <div class="col-md-4">
-                          <div class="card mb-4 box-shadow">
-                              <img class="card-img-top" src="https://via.placeholder.com/150x100" alt="Card Image Cap">
-                              <div class="card-body">
-                                  <h4 class=""><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
-                                      <p class="card-text"></p>
-                                  <div class="d-flex justify-content-between align-items-center">
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  {% endfor %}
-              </div>
-          </div>
-      </div>
-      {% endblock %}
-    </li>
-  {% endfor %}
-</ul>
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for search in object_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="{{ search.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
+                    <div class="card-body">
+                        <h4 class="lead"><a class="text-dark" href="{{ search.get_absolute_url }}"> {{ search.nama }}</a></h4>
+                            <p class="card-text"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group"></div>
+                            <a href="{% url 'coworkingSpace:edit' search.pk %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+                            <a href="{% url 'coworkingSpace:delete' search.pk %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

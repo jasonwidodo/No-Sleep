@@ -10,6 +10,13 @@ class IndexView(ListView):
     template_name = 'coworkingSpace/index.html'
     context_object_name = 'index'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        for x in context['index']:
+            if x.favorit.filter(id=self.request.user.id).exists():
+                x.is_favorit = True
+        return context
+
 class SingleView(DetailView):
     model = CoworkingSpace
     template_name = 'coworkingSpace/single.html'
@@ -75,4 +82,9 @@ class SearchResultsView(ListView):
         object_list = CoworkingSpace.objects.filter(
             Q(nama__icontains=query)
         )
+
+        for x in object_list:
+            if x.favorit.filter(id=self.request.user.id).exists():
+                x.is_favorit = True
+
         return object_list

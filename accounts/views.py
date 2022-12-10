@@ -43,8 +43,8 @@ def ruang_favorit(request):
     user = request.user
     ruang_favorit = user.favorit.all()
 
-    print('ruang favorit:')
     for x in ruang_favorit:
-        print(x.id)
+        if x.favorit.filter(id=request.user.id).exists():
+            x.is_favorit = True
 
     return render (request=request, template_name="ruang_favorit.html", context={"ruang_favorit":ruang_favorit})

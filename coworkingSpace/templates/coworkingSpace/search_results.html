@@ -16,6 +16,11 @@
                                       <p class="card-text"></p>
                                   <div class="d-flex justify-content-between align-items-center">
                                   </div>
+                                  {% if not coworkingSpace.is_favorit %}
+                                        <a href="{% url 'coworkingSpace:add_favorit' coworkingSpace.id %}"><i class="fa-regular fa-heart"></i></a>
+                                    {% else %}
+                                        <a href="{% url 'coworkingSpace:delete_favorit' coworkingSpace.id %}"><i class="fa fa-heart"></i></a>
+                                    {% endif %}
                               </div>
                           </div>
                       </div>

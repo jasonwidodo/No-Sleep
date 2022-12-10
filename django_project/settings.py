@@ -42,7 +42,7 @@ if not PRODUCTION:
 # Application definition
 
 INSTALLED_APPS = [
-     'accounts',
+    'accounts',
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',

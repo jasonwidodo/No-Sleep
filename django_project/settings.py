@@ -152,7 +152,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # You can use this directory to store project-wide static files.
 STATICFILES_DIRS = [
-    BASE_DIR / '/static',
+    BASE_DIR / "static",
+    '/main/static/',
 ]
 
 # Make sure the directories exist to prevent errors when doing `collectstatic`.

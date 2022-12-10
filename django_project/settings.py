@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-s47d=a5+w=a2_%znogcq%-8@@0n4b!8)$m)^8c$k3y04@m_tdc
 PRODUCTION = os.getenv('DATABASE_URL') is not None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not PRODUCTION
+DEBUG = False
 
 APP_NAME = os.getenv('APP_NAME', '')
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     'main',
     'coworkingSpace',

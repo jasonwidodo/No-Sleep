@@ -1,0 +1,17 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-5">
+                <img class="card-img-top" src="{{ post.coworking_space.image.url }}" alt="Card Image Cap" style="height:300px;" />
+                <h2 class=""pt-5>{{ post.id }}</h2>
+                <p>Ticket Amount {{ post.ticket_amount }}</p>
+                <p>Booking Status {{ post.booking_status }}</p>
+                <p>Payment Status {{ post.payment_status }}</p>
+            </div>
+            <a href="{% url 'booking:edit' pk=post.id%}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'booking:cancel' pk=post.id%}" class="btn btn-danger">Cancel</a>
+    </div>
+</div>
+{% endblock %}

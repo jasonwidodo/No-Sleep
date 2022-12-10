@@ -1,0 +1,14 @@
+{% extends 'bookinge/base.html' %}
+{% block content %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'booking:posts' %}">Manage</a>
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'booking:add' %}">Add New</a>
+</nav>
+<div class="containter pt-5">
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure want to delete "{{ object }}"</p>
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+{% endblock %}

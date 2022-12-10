@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('', include('coworkingSpace.urls', namespace='coworkingSpace')),
+    path('', include('booking.urls', namespace='booking')),
     path('accounts/', include('accounts.urls'))
 ]

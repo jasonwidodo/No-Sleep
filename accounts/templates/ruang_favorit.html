@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for coworkingSpace in ruang_favorit %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src="{{ coworkingSpace.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
+                        <div class="card-body">
+                            <h4 class=""><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
+                                <p class="card-text"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            </div>
+                            <!-- <a href="{% url 'coworkingSpace:delete_favorit' coworkingSpace.id %}"><i class="fa fa-heart"></i></a>
+                            
+                            <i class="fa-regular fa-heart"></i> -->
+                            {% if not coworkingSpace.is_favorit %}
+                                <a href="{% url 'coworkingSpace:add_favorit' coworkingSpace.id %}"><i class="fa-regular fa-heart"></i></a>
+                            {% else %}
+                                <a href="{% url 'coworkingSpace:delete_favorit' coworkingSpace.id %}"><i class="fa fa-heart"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

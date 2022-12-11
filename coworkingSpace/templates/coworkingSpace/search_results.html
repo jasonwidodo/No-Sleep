@@ -1,5 +1,39 @@
 {% extends 'coworkingSpace/base.html' %}
 
+<<<<<<< HEAD
+<ul>
+  {% for city in object_list %}
+    <li>
+      {% block content %}
+      <div class="album py-5 bg-light">
+          <div class="container">
+              <div class="row">
+                  {% for coworkingSpace in index %}
+                      <div class="col-md-4">
+                          <div class="card mb-4 box-shadow">
+                              <img class="card-img-top" src="https://via.placeholder.com/150x100" alt="Card Image Cap">
+                              <div class="card-body">
+                                  <h4 class=""><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
+                                      <p class="card-text"></p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                  </div>
+                                  {% if not coworkingSpace.is_favorit %}
+                                        <a href="{% url 'coworkingSpace:add_favorit' coworkingSpace.id %}"><i class="fa-regular fa-heart"></i></a>
+                                    {% else %}
+                                        <a href="{% url 'coworkingSpace:delete_favorit' coworkingSpace.id %}"><i class="fa fa-heart"></i></a>
+                                    {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+      {% endblock %}
+    </li>
+  {% endfor %}
+</ul>
+=======
 {% block content %}
 <div class="album py-5 bg-light">
     <div class="container">
@@ -24,3 +58,4 @@
     </div>
 </div>
 {% endblock %}
+>>>>>>> acf51c47057a353cf93f0f7391672593fc9184a5

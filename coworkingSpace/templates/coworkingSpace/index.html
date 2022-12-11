@@ -1,17 +1,69 @@
 {% extends 'coworkingSpace/base.html' %}
 
 {% block content %}
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            {% for coworkingSpace in index %}
-                <div class="col-md-4">
-                    <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="{{ coworkingSpace.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
-                        <div class="card-body">
-                            <h4 class=""><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
-                                <p class="card-text"></p>
-                            <div class="d-flex justify-content-between align-items-center">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #F8F7F3;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 350px;
+            height: 230px;
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            background-color: white;
+            color: black;
+        }
+
+        .flip-card-back {
+            background-color: white;
+            color: black;
+            transform: rotateY(180deg);
+        }
+    </style>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                {% for coworkingSpace in index %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        <img src="{{ coworkingSpace.image.url }}" alt="Card Image Cap" style="max-width:100%; height:auto">
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <h4><a href="{{ coworkingSpace.get_absolute_url }}">{{ coworkingSpace.nama }}</a></h4>
+                                        <p>Alamat : {{ coworkingSpace.alamat}}</p>
+                                        <p>Rp. {{ coworkingSpace.harga}} ,-</p>
+                                    </div>
+                                </div>
                             </div>
                             {% if not coworkingSpace.is_favorit %}
                                 <a href="{% url 'coworkingSpace:add_favorit' coworkingSpace.id %}"><i class="fa-regular fa-heart"></i></a>
@@ -19,10 +71,10 @@
                                 <a href="{% url 'coworkingSpace:delete_favorit' coworkingSpace.id %}"><i class="fa fa-heart"></i></a>
                             {% endif %}
                         </div>
+                    <br>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

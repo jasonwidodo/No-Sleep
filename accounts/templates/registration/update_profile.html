@@ -1,14 +1,54 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-8">
-<form method="post">
-    {% csrf_token %}
-    {{ user_form | crispy }}
-    {{ profile_form | crispy }}
-    <button type="submit" class="btn btn-primary">Save changes</button>
-</form>
+<div class="col-8">
+   <div class="card mb-4">
+      <div class="card-body">
+         <h2 class="mb-4">Update profile</h2>
+         <form method="post" novalidate autocomplete="off" class="needs-validation">
+            {% csrf_token %}
+            {% if messages %}
+               <div class="alert alert-success" role="alert">
+                  <ul class="messages" style="list-style: none">
+                     {% for message in messages %}
+                     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                     {{ message }}
+                     </li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            {% endif %}
+            {{ user_form | crispy }}
+            <div class="form-outline mb-4">
+               <label for="mobileNumberInput">Mobile number</label><br>
+               <input type="text" value="{{user.profile.mobile_number}}" name="mobile_number" class="form-control" id="mobileNumberInput">
+            </div>
+            <div class="form-outline mb-4">
+               <label for="locationInput">Location</label><br>
+               <input type="text" value="{{user.profile.location}}" name="location" class="form-control" id="locationInput">
+            </div>
+            <div class="form-outline form-group mb-4">
+               <label for="datepicker">Birth date</label><br>
+               <input id="datepicker" value="{{user.profile.birth_date}}" class="form-control datepicker" type="text" name='birth_date'>
+            </div>
+            <div class="form-outline mb-4">
+               <label for="genderSelect">Gender</label><br>
+               <select name="gender" class="form-select" aria-label="Default select example" id="genderSelect">
+                  <option selected value="{{user.profile.gender}}">{{user.profile.gender}}</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                  <option value="O">Others</option>
+               </select>
+               <br>
+            </div>
+            <div class="form-outline mb-4">
+               <label for="instanceInput">Instance</label><br>
+               <input type="text" value="{{user.profile.instance}}" name="instance" class="form-control" id="instanceInput">
+            </div>
+            <button type="submit" class="btn btn-dark">Save changes</button>
+         </form>
+      </div>
+   </div>
+</div>
 {% endblock %}

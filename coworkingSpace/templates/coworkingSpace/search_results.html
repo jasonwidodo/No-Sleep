@@ -1,5 +1,6 @@
-<h1>Search Results</h1>
+{% extends 'coworkingSpace/base.html' %}
 
+<<<<<<< HEAD
 <ul>
   {% for city in object_list %}
     <li>
@@ -32,3 +33,29 @@
     </li>
   {% endfor %}
 </ul>
+=======
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for search in object_list %}
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top" src="{{ search.image.url }}" alt="Card Image Cap" style = 'object-fit:cover; width: 150px; height: 100px;'>
+                    <div class="card-body">
+                        <h4 class="lead"><a class="text-dark" href="{{ search.get_absolute_url }}"> {{ search.nama }}</a></h4>
+                            <p class="card-text"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group"></div>
+                            <a href="{% url 'coworkingSpace:edit' search.pk %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Edit</a>
+                            <a href="{% url 'coworkingSpace:delete' search.pk %}" class="btn btn-sm btn-outline-secondary" role="button" aria-pressed="true">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+>>>>>>> acf51c47057a353cf93f0f7391672593fc9184a5

@@ -7,6 +7,8 @@ ENV/
 env.bak/
 venv.bak/
 
+.idea/*
+
 # Python cache files
 __pycache__/
 
@@ -77,4 +79,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-static/
+/static

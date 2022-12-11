@@ -14,9 +14,7 @@ def register_request(request):
             form = NewUserForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                login(request, user)
-                messages.success(request, "Registration successful." )
-                return redirect("main:home")
+                return redirect("login")
             messages.error(request, "Unsuccessful registration. Invalid information.")
         form = NewUserForm()
         return render (request=request, template_name="registration/register.html", context={"register_form":form})
@@ -29,9 +27,8 @@ def update_profile(request):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
-            return redirect('main:home')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            messages.error(request, _('Please provide the correct information!'))
     else:
         user_form = NewUserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)

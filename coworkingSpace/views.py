@@ -70,9 +70,6 @@ class SearchView(TemplateView):
     model = CoworkingSpace
     template_name = 'coworkingSpace/search.html'
 
-# def searchPage(request):
-#     return render(request, 'search.html')
-
 class SearchResultsView(ListView):
     model = CoworkingSpace
     template_name = 'coworkingSpace/search_results.html'
@@ -88,3 +85,4 @@ class SearchResultsView(ListView):
                 x.is_favorit = True
 
         return object_list
+
